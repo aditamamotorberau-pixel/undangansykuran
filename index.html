@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halal Bihalal & Syukuran - Aditama & SCM Jreez Racing</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #020617; /* Slate 950 / Deep Navy */
+            color: #f8fafc;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a8a;
+            border-radius: 10px;
+        }
+        #splash {
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .img-overlay {
+            background: linear-gradient(to top, rgba(2, 6, 23, 1) 0%, rgba(2, 6, 23, 0.4) 50%, transparent 100%);
+        }
+        /* Music Rotate Animation */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: rotate 5s linear infinite;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Music Control Button (Floating) -->
+    <div id="music-control" class="fixed bottom-6 right-6 z-[60] hidden">
+        <button onclick="toggleMusic()" class="w-12 h-12 bg-blue-600/80 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-lg border border-white/20 animate-spin-slow">
+            <i id="music-icon" data-lucide="music" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <!-- Background Music (Hidden Container) -->
+    <div id="music-player-container" class="fixed -top-[1000px] left-0 pointer-events-none opacity-0">
+        <div id="player"></div>
+    </div>
+
+    <!-- Splash Screen / Welcome -->
+    <div id="splash" class="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center text-center px-6">
+        <div class="mb-8" data-aos="zoom-in">
+            <h2 class="text-blue-500 font-bold tracking-[0.3em] text-sm mb-2 uppercase">Invitation</h2>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 italic">Halal Bihalal & Syukuran</h1>
+            <p class="text-slate-400 max-w-md mx-auto">Aditama Racing & SCM Jreez Racing</p>
+        </div>
+        <button onclick="openInvitation()" class="group relative px-8 py-3 overflow-hidden font-medium rounded-full bg-blue-700 text-white transition-all hover:bg-blue-600">
+            <span class="relative z-10 flex items-center gap-2">
+                <i data-lucide="mail-open" class="w-5 h-5"></i> Buka Undangan
+            </span>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://lh3.googleusercontent.com/d/130k9gVxkV6RlZu4STA77dn9folszpVQB" 
+                referrerpolicy="no-referrer"
+                alt="Hero Background" 
+                class="w-full h-full object-cover"
+            >
+            <div class="absolute inset-0 img-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4" data-aos="fade-up" data-aos-duration="1500">
+            <h3 class="text-blue-400 font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">Membangun Semangat Baru</h3>
+            <h1 class="text-5xl md:text-8xl font-serif font-bold text-white mb-4 leading-tight">HALAL BIHALAL <br>& SYUKURAN</h1>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-6">
+                <span class="text-xl md:text-2xl font-bold border-b-2 border-blue-600 pb-1 italic">ADITAMA RACING</span>
+                <span class="text-xl md:text-2xl font-bold border-b-2 border-blue-600 pb-1 italic">SCM JREEZ RACING</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="text-white/50 w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- Opening Message -->
+    <section class="py-24 bg-slate-950 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-serif mb-8 text-blue-100 italic">"11 TAHUN BERKARYA"</h2>
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light italic">
+                "Halal bihalal dan syukuran ini menjadi awal semangat baru untuk tim balap yang makin kompak dan sukses."
+            </p>
+            <div class="w-24 h-1 bg-blue-700 mx-auto mt-10 rounded-full"></div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="py-20 bg-slate-900/50">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="glass-card p-10 rounded-3xl text-center" data-aos="zoom-in">
+                <h3 class="text-xl font-semibold mb-8 tracking-widest uppercase">HITUNG MUNDUR MULAINYA ACARA</h3>
+                <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-white/5">
+                        <span id="days" class="text-4xl md:text-6xl font-bold text-blue-500 block">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Hari</span>
+                    </div>
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-white/5">
+                        <span id="hours" class="text-4xl md:text-6xl font-bold text-blue-500 block">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Jam</span>
+                    </div>
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-white/5">
+                        <span id="minutes" class="text-4xl md:text-6xl font-bold text-blue-500 block">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Menit</span>
+                    </div>
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-white/5">
+                        <span id="seconds" class="text-4xl md:text-6xl font-bold text-blue-500 block">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Detik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details -->
+    <section id="event" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-4xl font-serif font-bold mb-6 text-white italic">Detail Acara</h2>
+                <div class="space-y-8">
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 bg-blue-900/50 rounded-2xl flex items-center justify-center shrink-0 border border-blue-500/30">
+                            <i data-lucide="calendar" class="text-blue-400 w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">Sabtu, 28 Maret 2026</h4>
+                            <p class="text-slate-400 mt-1">Simpan tanggal ini di agenda Anda.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="w-14 h-14 bg-blue-900/50 rounded-2xl flex items-center justify-center shrink-0 border border-blue-500/30">
+                            <i data-lucide="clock" class="text-blue-400 w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">11.30 WIB - 13.00 WIB</h4>
+                            <p class="text-slate-400 mt-1">Kami mengharapkan kehadiran tepat waktu.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <!-- Custom Google Maps SVG Icon -->
+                        <div class="w-14 h-14 bg-blue-900/50 rounded-2xl flex items-center justify-center shrink-0 border border-blue-500/30">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+                                <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold">A&M Co. Yogyakarta</h4>
+                            <p class="text-slate-400 mt-1 text-sm">Jl. Parangtritis No.139, Brontokusuman, Kec. Mergangsan, Kota Yogyakarta, DIY 55143</p>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=A%26M+Co.+Yogyakarta" target="_blank" class="inline-flex items-center gap-2 text-blue-400 text-sm mt-2 hover:underline">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Petunjuk Lokasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800" data-aos="fade-left">
+                <!-- Updated Google Maps Embed URL -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.7471900133036!2d110.37059867590825!3d-7.816584292198083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a57a091008069%3A0x6b90e9e144a1eb40!2sA%26M%20Co.%20Yogyakarta!5e0!3m2!1sid!2sid!4v1711511234567!5m2!1sid!2sid" 
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="py-24 bg-slate-900/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold italic mb-4 text-white">Racing Moments</h2>
+                <p class="text-slate-400 tracking-widest uppercase text-sm">Galeri Foto Balap & Kebersamaan</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/1PiJXDWrOBUtvZ3IsdeKQKSG6HeHd25lG" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/1BmM5y96twwB1nkmEbBeAlPNAjt2Ow9EK" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 2">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/1xP7bFQ1TCF63WLDnWeiTa0l_0Jzzkmqq" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 3">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/120cYzJq-dgQZNsgavyufcq3q89O1V1SN" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/13Ulgt99G6JPLlWALWoeBsCP81prk6R5P" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 5">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl aspect-[4/5] shadow-xl bg-slate-800">
+                    <img src="https://lh3.googleusercontent.com/d/1rgb7UcAgjYz_x75h5we96LUVaQaC2nPd" referrerpolicy="no-referrer" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Racing Photo 6">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP / Closing -->
+    <section class="py-24 px-6 text-center bg-slate-950">
+        <div class="max-w-2xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl font-serif font-bold mb-6 italic">Terima Kasih</h2>
+            <p class="text-slate-400 mb-12">
+                Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.
+            </p>
+            <div class="flex flex-col items-center">
+                <p class="font-bold text-white tracking-widest uppercase mb-2 italic">Hormat Kami,</p>
+                <div class="flex gap-4 text-blue-500 font-bold italic text-sm md:text-base">
+                    <span>ADITAMA RACING</span>
+                    <span>&</span>
+                    <span>SCM JREEZ RACING</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 bg-black text-center text-slate-600 text-sm border-t border-white/5">
+        <p>&copy; 2026 Aditama & SCM Jreez Racing. Built with Passion.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        lucide.createIcons();
+
+        let player;
+        let isMusicPlaying = false;
+        const videoId = 'Ujol2D2CgKY';
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 0,
+                    'loop': 1,
+                    'playlist': videoId,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0,
+                    'enablejsapi': 1,
+                    'origin': window.location.origin
+                }
+            });
+        }
+
+        function toggleMusic() {
+            const icon = document.getElementById('music-icon');
+            const btn = document.querySelector('#music-control button');
+            
+            if (isMusicPlaying) {
+                player.pauseVideo();
+                isMusicPlaying = false;
+                btn.classList.remove('animate-spin-slow');
+                icon.setAttribute('data-lucide', 'volume-x');
+            } else {
+                player.playVideo();
+                isMusicPlaying = true;
+                btn.classList.add('animate-spin-slow');
+                icon.setAttribute('data-lucide', 'music');
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function openInvitation() {
+            const splash = document.getElementById('splash');
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.visibility = 'hidden';
+                document.body.classList.remove('overflow-hidden');
+                
+                if (player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                    isMusicPlaying = true;
+                    document.getElementById('music-control').classList.remove('hidden');
+                }
+            }, 800);
+        }
+
+        const targetDate = new Date("March 28, 2026 11:30:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const daysEl = document.getElementById("days");
+            if(daysEl) {
+                daysEl.innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+            }
+        }, 1000);
+
+        document.body.classList.add('overflow-hidden');
+    </script>
+
+</body>
+</html>
